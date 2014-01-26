@@ -9,8 +9,8 @@ import akka.actor.Props;
 
 public class Bedrijf {
 
-	private static final int AANTAL_KLANTEN = 2;
-	private static final int AANTAL_ONTWIKKELAARS = 1;
+	private static final int AANTAL_KLANTEN = 5;
+	private static final int AANTAL_ONTWIKKELAARS = 7;
 
 	private ActorRef klaas;
 	private ActorRef secretaresse;

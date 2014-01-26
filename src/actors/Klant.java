@@ -60,7 +60,7 @@ public class Klant extends UntypedActor {
 	
 	public void gaNaarBedrijf() {
 		try {
-			Thread.sleep((long)(Math.random() * 3000));
+			Thread.sleep((long)(Math.random() * 4000) + 4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -68,7 +68,7 @@ public class Klant extends UntypedActor {
 	
 	public void gaWeerNaarHuis() {
 		try {
-			Thread.sleep((long)(Math.random() * 10000));
+			Thread.sleep((long)(Math.random() * 6000) + 4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

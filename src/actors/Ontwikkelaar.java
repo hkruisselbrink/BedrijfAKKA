@@ -62,7 +62,7 @@ public class Ontwikkelaar extends UntypedActor {
 
 	public void gaWeerAanHetWerk() {
 		try {
-			Thread.sleep((long)(Math.random() * 3000));
+			Thread.sleep((long)(Math.random() * 4000)+4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
