@@ -44,6 +44,7 @@ public class Secretaresse extends UntypedActor {
 						klaas.tell(Bericht.PLANKLANT, klant);
 						klant.tell(Bericht.UITNODIGINGOVERLEG, getSelf());
 					}
+					wachtendeKlanten.clear();
 				} else {
 					wachtendeOntwikkelaars.add(getSender());
 					if(wachtendeOntwikkelaars.size() == 3) {
@@ -63,15 +64,21 @@ public class Secretaresse extends UntypedActor {
 			wachtendeKlanten.add(getSender());
 			if(wachtendeOntwikkelaars.size() > 0 && !inOverleg) {
 				inOverleg = true;
+				boolean invited = false;
 				for(ActorRef ontwikkelaar : wachtendeOntwikkelaars) {
-					if(wachtendeOntwikkelaars.size() != 1) {
+					if(invited) {
 						ontwikkelaar.tell(Bericht.GAWEERWERKEN, getSelf());
+					} else {
+						ontwikkelaar.tell(Bericht.UITNODIGINGOVERLEG, getSelf());
+						invited = false;
 					}
 				}
+				wachtendeOntwikkelaars.clear();
 				for(ActorRef klant : wachtendeKlanten) {
 					klaas.tell(Bericht.PLANKLANT, klant);
 					klant.tell(Bericht.UITNODIGINGOVERLEG, klaas);
 				}
+				wachtendeKlanten.clear();
 			}
 			
 			break;
