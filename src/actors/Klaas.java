@@ -44,7 +44,7 @@ public class Klaas extends UntypedActor {
 			if (ontwikkelaarsAanwezig.size() == 3) {
 				assert ontwikkelaarsAanwezig.size() == 3 : "te veel ontwikkelaars gereed voor een overleg";
 				for (ActorRef ontwikkelaar : ontwikkelaarsAanwezig) {
-					ontwikkelaar.tell(Bericht.SCRUMOVERLEGBEGONNEN, getSelf());
+					ontwikkelaar.tell(Bericht.OVERLEGBEGONNEN, getSelf());
 				}
 				
 				startScrumOverleg();
@@ -65,10 +65,10 @@ public class Klaas extends UntypedActor {
 			}
 			if(klantenAanwezig.size() == klantenGeplanned.size()) {
 				for (ActorRef ontwikkelaar : ontwikkelaarsAanwezig) {
-					ontwikkelaar.tell(Bericht.SCRUMOVERLEGBEGONNEN, getSelf());
+					ontwikkelaar.tell(Bericht.OVERLEGBEGONNEN, getSelf());
 				}
 				for (ActorRef klant : klantenAanwezig) {
-					klant.tell(Bericht.SCRUMOVERLEGBEGONNEN, getSelf());
+					klant.tell(Bericht.OVERLEGBEGONNEN, getSelf());
 				}
 				
 				startScrumOverleg();

@@ -39,17 +39,17 @@ public class Secretaresse extends UntypedActor {
 						ontwikkelaar.tell(Bericht.GAWEERWERKEN, getSelf());
 					}
 					wachtendeOntwikkelaars.clear();
-					getSender().tell(Bericht.UITNODIGINGOVERLEG, klaas);
+					getSender().tell(Bericht.UITNODIGINGOVERLEG, getSelf());
 					for(ActorRef klant : wachtendeKlanten) {
 						klaas.tell(Bericht.PLANKLANT, klant);
-						klant.tell(Bericht.UITNODIGINGOVERLEG, klaas);
+						klant.tell(Bericht.UITNODIGINGOVERLEG, getSelf());
 					}
 				} else {
 					wachtendeOntwikkelaars.add(getSender());
 					if(wachtendeOntwikkelaars.size() == 3) {
 						inOverleg = true;
 						for(ActorRef ontwikkelaar : wachtendeOntwikkelaars) {
-							ontwikkelaar.tell(Bericht.UITNODIGINGOVERLEG, klaas);
+							ontwikkelaar.tell(Bericht.UITNODIGINGOVERLEG, getSelf());
 						}
 						wachtendeOntwikkelaars.clear();
 					}

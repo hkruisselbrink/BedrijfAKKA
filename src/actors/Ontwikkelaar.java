@@ -8,10 +8,12 @@ import akka.actor.UntypedActor;
 public class Ontwikkelaar extends UntypedActor {
 
 	private ActorRef secretaresse;
+	private ActorRef klaas;
 	private Status status;
 
-	public Ontwikkelaar(ActorRef secretaresse) {
+	public Ontwikkelaar(ActorRef secretaresse, ActorRef klaas) {
 		this.secretaresse = secretaresse;
+		this.klaas = klaas;
 		
 		status = Status.WERKEN;
 		gaWeerAanHetWerk();
@@ -28,10 +30,10 @@ public class Ontwikkelaar extends UntypedActor {
 		case UITNODIGINGOVERLEG :
 			System.out.println("== " + getSelf().path().name() + " uitgenodigd voor scrumoverleg");
 			//Klaas vertellen dat je klaar bent voor gesprek
-			getSender().tell(Bericht.ONTWIKKELAARGEREEDVOOROVERLEG, getSelf());
+			klaas.tell(Bericht.ONTWIKKELAARGEREEDVOOROVERLEG, getSelf());
 			break;
-		case SCRUMOVERLEGBEGONNEN :
-			System.out.println("=> " +getSelf().path().name() + " in scrumoverleg");
+		case OVERLEGBEGONNEN :
+			System.out.println("=> " +getSelf().path().name() + " in klant-/scrumoverleg");
 			status = Status.INOVERLEG;
 			break;
 		case GAWEERWERKEN :

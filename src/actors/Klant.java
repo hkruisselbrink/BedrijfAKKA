@@ -30,11 +30,11 @@ public class Klant extends UntypedActor {
 			status = Status.ONDERWEG;
 			System.out.println("=> " +getSelf().path().name() + " is onderweg naar bedrijf");
 			gaNaarBedrijf();
-			getSender().tell(Bericht.KLANTGEREEDVOOROVERLEG, getSelf());
+			klaas.tell(Bericht.KLANTGEREEDVOOROVERLEG, getSelf());
 			status = Status.WACHTEN;
 			break;
-		case SCRUMOVERLEGBEGONNEN :
-			System.out.println("=> " +getSelf().path().name() + " in scrumoverleg");
+		case OVERLEGBEGONNEN :
+			System.out.println("=> " +getSelf().path().name() + " in klantoverleg");
 			status = Status.INOVERLEG;
 			break;
 		case GAWEERNAARHUIS :

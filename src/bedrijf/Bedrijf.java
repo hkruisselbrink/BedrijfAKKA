@@ -9,8 +9,8 @@ import akka.actor.Props;
 
 public class Bedrijf {
 
-	private static final int AANTAL_KLANTEN = 10;
-	private static final int AANTAL_ONTWIKKELAARS = 5;
+	private static final int AANTAL_KLANTEN = 2;
+	private static final int AANTAL_ONTWIKKELAARS = 1;
 
 	private ActorRef klaas;
 	private ActorRef secretaresse;
@@ -28,7 +28,7 @@ public class Bedrijf {
 		
 		// Ontwikkelaars aanmaken
 		for (int i = 0; i < AANTAL_ONTWIKKELAARS; i++) {
-			system.actorOf(Props.create(Ontwikkelaar.class, secretaresse), "Ontwikkelaar" + i);
+			system.actorOf(Props.create(Ontwikkelaar.class, secretaresse, klaas), "Ontwikkelaar" + i);
 		}
 		// Klanten aanmaken
 		for (int i = 0; i < AANTAL_KLANTEN; i++) {
