@@ -7,6 +7,10 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 
 
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public class Bedrijf {
 
 	private static final int AANTAL_KLANTEN = 5;
@@ -15,6 +19,9 @@ public class Bedrijf {
 	private ActorRef klaas;
 	private ActorRef secretaresse;
 
+	/**
+	 * Start 
+	 */
 	public void startWerkdag() {
 
 		// Maak een nieuw ActorSysteem aan

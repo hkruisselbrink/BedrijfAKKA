@@ -9,6 +9,10 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 
 
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public class Klaas extends UntypedActor {
 
 	private ActorRef secretaresse;
@@ -42,7 +46,7 @@ public class Klaas extends UntypedActor {
 		case ONTWIKKELAARGEREEDVOOROVERLEG :
 			ontwikkelaarsAanwezig.add(getSender());
 			if (ontwikkelaarsAanwezig.size() == 3) {
-				assert ontwikkelaarsAanwezig.size() == 3 : "te veel ontwikkelaars gereed voor een overleg";
+				assert ontwikkelaarsAanwezig.size() == 3 : "te veel/weinig ontwikkelaars gereed voor een overleg";
 				for (ActorRef ontwikkelaar : ontwikkelaarsAanwezig) {
 					ontwikkelaar.tell(Bericht.OVERLEGBEGONNEN, getSelf());
 				}
@@ -54,7 +58,7 @@ public class Klaas extends UntypedActor {
 				}
 				
 				ontwikkelaarsAanwezig.clear();
-				assert ontwikkelaarsAanwezig.size() == 0 : "bla";
+				assert ontwikkelaarsAanwezig.size() == 0 : "er zijn nog steeds ontwikkelaars aanwezig";
 
 				secretaresse.tell(Bericht.KLAASKLAARMETOVERLEG, getSelf());
 			}
@@ -103,6 +107,7 @@ public class Klaas extends UntypedActor {
 	}
 
 	public void startScrumOverleg() {
+	
 		try {
 			Thread.sleep((long)(Math.random() * 5000));
 		} catch (InterruptedException e) {

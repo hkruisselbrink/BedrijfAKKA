@@ -1,10 +1,12 @@
 package actors;
-
 import enums.*;
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 
-
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public class Ontwikkelaar extends UntypedActor {
 
 	private ActorRef secretaresse;
@@ -44,16 +46,6 @@ public class Ontwikkelaar extends UntypedActor {
 		default:
 			break;
 		}
-	}
-
-	@Override
-	public void preStart() throws Exception {
-		//		System.out.println(getSelf().path().name() + " gestart");
-	}
-
-	@Override
-	public void postStop() throws Exception {
-		//		System.out.println(getSelf().path().name() + " gestopt");
 	}
 	
 	public Status getStatus() {

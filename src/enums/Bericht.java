@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public enum Bericht {
 	KLANTGEREEDVOOROVERLEG,
 	

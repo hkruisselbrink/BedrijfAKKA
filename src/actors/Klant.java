@@ -4,11 +4,15 @@ import enums.*;
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 
-
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public class Klant extends UntypedActor {
 	
 	private ActorRef secretaresse;
 	private ActorRef klaas;
+	@SuppressWarnings("unused")
 	private Status status;
 	
 	public Klant(ActorRef secretaresse, ActorRef klaas) {
@@ -45,17 +49,6 @@ public class Klant extends UntypedActor {
 		default:
 			break;
 		}
-	}
-	
-	@Override
-	public void postStop() throws Exception {
-		super.postStop();
-	}
-
-	@Override
-	public void preStart() throws Exception {
-		// TODO Auto-generated method stub
-		super.preStart();
 	}
 	
 	public void gaNaarBedrijf() {

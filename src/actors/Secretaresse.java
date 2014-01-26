@@ -1,14 +1,14 @@
 package actors;
-
 import enums.*;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 
-
+/**
+ * @author Hans Kruisselbrink & Joost Elders
+ *
+ */
 public class Secretaresse extends UntypedActor {
 
 	private ActorRef klaas;
@@ -39,6 +39,7 @@ public class Secretaresse extends UntypedActor {
 						ontwikkelaar.tell(Bericht.GAWEERWERKEN, getSelf());
 					}
 					wachtendeOntwikkelaars.clear();
+					assert wachtendeOntwikkelaars.size() == 0 : "er wachten nog steeds ontwikkelaars";
 					getSender().tell(Bericht.UITNODIGINGOVERLEG, getSelf());
 					for(ActorRef klant : wachtendeKlanten) {
 						klaas.tell(Bericht.PLANKLANT, klant);
@@ -55,7 +56,7 @@ public class Secretaresse extends UntypedActor {
 						wachtendeOntwikkelaars.clear();
 					}
 				}
-				
+
 			} else {
 				getSender().tell(Bericht.GAWEERWERKEN, getSelf());
 			}
@@ -63,6 +64,8 @@ public class Secretaresse extends UntypedActor {
 		case IKWILKLANTOVERLEG :
 			wachtendeKlanten.add(getSender());
 			if(wachtendeOntwikkelaars.size() > 0 && !inOverleg) {
+				assert wachtendeOntwikkelaars.size() != 0 : "er zijn geen ontwikkelaars beschikbaar";
+				assert !inOverleg : "Klaas is al is overleg";
 				inOverleg = true;
 				boolean invited = false;
 				for(ActorRef ontwikkelaar : wachtendeOntwikkelaars) {
@@ -74,13 +77,15 @@ public class Secretaresse extends UntypedActor {
 					}
 				}
 				wachtendeOntwikkelaars.clear();
+				assert wachtendeOntwikkelaars.size() == 0 : "er wachten nog steeds ontwikkelaars";
 				for(ActorRef klant : wachtendeKlanten) {
 					klaas.tell(Bericht.PLANKLANT, klant);
 					klant.tell(Bericht.UITNODIGINGOVERLEG, klaas);
 				}
 				wachtendeKlanten.clear();
+				assert wachtendeKlanten.size() == 0 : "er wachten nog steeds klanten";
 			}
-			
+
 			break;
 		case KLAASKLAARMETOVERLEG :
 			System.out.println("Klaas klaar met een scrumoverleg");
@@ -89,12 +94,6 @@ public class Secretaresse extends UntypedActor {
 		default:
 			break;
 		}	
-	}
-
-	@Override
-	public void postStop() throws Exception {
-		// TODO Auto-generated method stub
-		super.postStop();
 	}
 
 	@Override
